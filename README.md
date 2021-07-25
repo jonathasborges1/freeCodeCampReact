@@ -498,7 +498,7 @@ class ControlledInput extends React.Component {
   }
 };
 ~~~
-# Item 29 -
+# Item 29 - Create a Controlled Form
 ## Contexto - Create a Controlled Form
 > The last challenge showed that React can control the internal state for certain elements like input and textarea, which makes them controlled components. This applies to other form elements as well, including the regular HTML form element. [...]
 
@@ -521,5 +521,90 @@ class ControlledInput extends React.Component {
 
 ## Código Solução
 ~~~
+class MyForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+      submit: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleChange(event) {
+    this.setState({
+      input: event.target.value
+    });
+  }
+  handleSubmit(event) {
+    this.setState({
+      submit: this.state.input
+    });
+    event.preventDefault()
+  }
+  
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          
+          <input 
+          type="text" 
+          value={this.state.input} 
+          onChange={this.handleChange}
+          />
 
+          <button type='submit'>Submit!</button>
+            
+        </form>
+        <h1>{this.state.submit}</h1>
+      </div>
+    );
+  }
+}
+~~~
+
+# Item 30 -
+## Contexto - Pass State as Props to Child Components
+> You saw a lot of examples that passed props to child JSX elements and child React components in previous challenges. You may be wondering where those props come from. A common pattern is to have a stateful component containing the state important to your app, that then renders child components. You want these components to have access to some pieces of that state, which are passed in as props
+
+## Fonte : https://www.freecodecamp.org/learn/front-end-libraries/react/pass-state-as-props-to-child-components
+
+## Saída Esperada
+~~~
+⏳ The MyApp component should render with a Navbar component inside.
+
+⏳ The Navbar component should receive the MyApp state property name as props.
+
+⏳ The h1 element in Navbar should render the name prop.
+~~~
+
+## Código Solução
+~~~
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'CamperBot'
+    }
+  }
+  render() {
+    return (
+       <div>
+         <Navbar name = {this.state.name}/>
+       </div>
+    );
+  }
+};
+
+class Navbar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <h1>Hello, my name is:{this.props.name}</h1>
+    );
+  }
+};
 ~~~
