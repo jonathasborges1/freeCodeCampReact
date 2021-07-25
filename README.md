@@ -1206,11 +1206,11 @@ class CheckUserAge extends React.Component {
 }
 ~~~
 
-# Item 42 - Render Conditionally from Props
+# Item 42 - render-conditionally-from-props
 ## Contexto 
 > So far, you've seen how to use if/else, &&, and the ternary operator (condition ? expressionIfTrue : expressionIfFalse) to make conditional decisions about what to render and when. However, there's one important topic left to discuss that lets you combine any or all of these concepts with another powerful React feature: props. Using props to conditionally render code is very common with React developers — that is, they use the value of a given prop to automatically make decisions about what to render. [...]
 
-###### fONTE: https://www.freecodecamp.org/learn/front-end-libraries/react/use-a-ternary-expression-for-conditional-rendering
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/use-a-ternary-expression-for-conditional-rendering
 
 ## Saída Esperada
 ~~~
@@ -1231,5 +1231,168 @@ class CheckUserAge extends React.Component {
 
 ## Código Solução
 ~~~
+class Results extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <h1>
+          {this.props.fiftyFifty >= 0.5 ? 'You Win!' : 'You Lose!' }
+      </h1>
+    )
+  }
+}
 
+class GameOfChance extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      counter: 1
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.setState(
+      (state) => {return {counter: state.counter + 1}});
+  }
+  render() {
+    const expression = Math.random() ; // retorna um valor aleatorio entre maior que zero e menor que 1
+    return (
+      <div>
+        <button onClick={this.handleClick}>Play Again</button>
+        <Results fiftyFifty={expression}/>
+        <p>{'Turn: ' + this.state.counter}</p>
+      </div>
+    );
+  }
+}
+~~~
+# Item 43 - Change Inline CSS Conditionally Based on Component State
+## Contexto 
+> At this point, you've seen several applications of conditional rendering and the use of inline styles. Here's one more example that combines both of these topics. You can also render CSS conditionally based on the state of a React component. To do this, you check for a condition, and if that condition is met, you modify the styles object that's assigned to the JSX elements in the render method. [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/change-inline-css-conditionally-based-on-component-state
+
+## Saída Esperada
+~~~
+⏳ The GateKeeper component should render a div element.
+
+⏳ The GateKeeper component should be initialized with a state key input set to an empty string.
+
+⏳ The GateKeeper component should render an h3 tag and an input tag.
+
+⏳ The input tag should initially have a style of 1px solid black for the border property.
+
+⏳ The input tag should be styled with a border of 3px solid red if the input value in state is longer than 15 characters.
+~~~
+
+## Código Solução
+~~~
+class GateKeeper extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    this.setState({ input: event.target.value })
+  }
+  render() {
+    let inputStyle = {
+      border: '1px solid black'
+    };
+    // Change code below this line
+    if(this.state.input.length > 15){
+      inputStyle = {
+        border: '3px solid red'
+      };
+    }
+    return (
+      <div>
+        <h3>Don't Type Too Much:</h3>
+        <input
+          type="text"
+          style={inputStyle}
+          value={this.state.input}
+          onChange={this.handleChange} />
+      </div>
+    );
+  }
+};
+~~~
+
+# Item 44 - Use Array.map() to Dynamically Render Elements
+## Contexto 
+> Conditional rendering is useful, but you may need your components to render an unknown number of elements. Often in reactive programming, a programmer has no way to know what the state of an application is until runtime, because so much depends on a user's interaction with that program. Programmers need to write their code to correctly handle that unknown state ahead of time. Using Array.map() in React illustrates this concept. [...]
+
+###### Fonte:https://www.freecodecamp.org/learn/front-end-libraries/react/use-array-map-to-dynamically-render-elements
+
+## Saída Esperada
+~~~
+⏳ The MyToDoList component should exist and render to the page.
+
+⏳ The first child of MyToDoList should be a textarea element.
+
+⏳ The second child of MyToDoList should be a br element.
+
+⏳ The third child of MyToDoList should be a button element.
+
+⏳ The state of MyToDoList should be initialized with toDoList as an empty array.
+
+⏳ The state of MyToDoList should be initialized with userInput as an empty string.
+
+⏳ When the Create List button is clicked, the MyToDoList component should dynamically return an unordered list that contains a list item element for every item of a comma-separated list entered into the textarea element.
+~~~
+
+## Código Solução
+~~~
+const textAreaStyles = {
+  width: 235,
+  margin: 5
+};
+
+class MyToDoList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userInput: '',
+      toDoList: []
+    }
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleSubmit() {
+    const itemsArray = this.state.userInput.split(',');
+    this.setState({
+      toDoList: itemsArray
+    });
+  }
+  handleChange(e) {
+    this.setState({
+      userInput: e.target.value
+    });
+  }
+  render() {
+    const items = this.state.toDoList.map( 
+      (element) => {return <li>{element}</li>}
+    );  
+    return (
+      <div>
+        <textarea
+          onChange={this.handleChange}
+          value={this.state.userInput}
+          style={textAreaStyles}
+          placeholder='Separate Items With Commas'
+        />
+        <br />
+        <button onClick={this.handleSubmit}>Create List</button>
+        <h1>My "To Do" List:</h1>
+        <ul>{items}</ul>
+      </div>
+    );
+  }
+}
 ~~~
