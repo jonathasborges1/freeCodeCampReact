@@ -1396,3 +1396,150 @@ class MyToDoList extends React.Component {
   }
 }
 ~~~
+
+# Item 45 - Give Sibling Elements a Unique Key Attribute
+## Contexto 
+> The last challenge showed how the map method is used to dynamically render a number of elements based on user input. However, there was an important piece missing from that example. When you create an array of elements, each one needs a key attribute set to a unique value. React uses these keys to keep track of which items are added, changed, or removed. This helps make the re-rendering process more efficient when the list is modified in any way [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/give-sibling-elements-a-unique-key-attribute
+
+## Saída Esperada
+~~~
+⏳ The Frameworks component should exist and render to the page.
+
+⏳ Frameworks should render an h1 element.
+
+⏳ Frameworks should render a ul element.
+
+⏳ The ul tag should render 6 child li elements.
+
+⏳ Each list item element should have a unique key attribute.
+
+⏳ Each list item element should contain text from frontEndFrameworks.
+~~~
+
+## Código Solução
+~~~
+const frontEndFrameworks = [
+  'React',
+  'Angular',
+  'Ember',
+  'Knockout',
+  'Backbone',
+  'Vue'
+];
+
+class Frameworks extends React.Component{
+  constructor(props){
+    super(props)
+  }
+  render(){
+    const renderFrameworks = frontEndFrameworks.map(
+      (key) => {return <li key={key}>{key}</li>}
+    );
+    return (
+      <div>
+        <h1>Popular Front End JavaScript Frameworks</h1>
+        <ul>{renderFrameworks}</ul>
+      </div>
+    );
+  }
+};
+~~~
+
+# Item 46 - Use Array.filter() to Dynamically Filter an Array
+## Contexto 
+> The map array method is a powerful tool that you will use often when working with React. Another method related to map is filter, which filters the contents of an array based on a condition, then returns a new array. For example, if you have an array of users that all have a property online which can be set to true or false, you can filter only those users that are online by writing: [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/use-array-filter-to-dynamically-filter-an-array
+
+## Saída Esperada
+~~~
+⏳ MyComponent should exist and render to the page.
+
+⏳ MyComponent's state should be initialized to an array of six users.
+
+⏳ MyComponent should return a div, an h1, and then an unordered list containing li elements for every user whose online status is set to true.
+
+⏳ MyComponent should render li elements that contain the username of each online user.
+
+⏳ Each list item element should have a unique key attribute.
+~~~
+
+## Código Solução
+~~~
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [
+        {
+          username: 'Jeff',
+          online: true
+        },
+        {
+          username: 'Alan',
+          online: false
+        },
+        {
+          username: 'Mary',
+          online: true
+        },
+        {
+          username: 'Jim',
+          online: false
+        },
+        {
+          username: 'Sara',
+          online: true
+        },
+        {
+          username: 'Laura',
+          online: true
+        }
+      ]
+    }
+  }
+  render() {
+    const usersOnline = this.state.users.filter(
+      (user) => {return user.online === true}
+    );
+    const renderOnline = usersOnline.map(
+      (user) =>  {return <li key={user.username}>{user.username}</li>}
+    );
+    return (
+       <div>
+         <h1>Current Online Users:</h1>
+         <ul>
+           {renderOnline}
+         </ul>
+       </div>
+    );
+  }
+};
+~~~
+
+# Item 47 - Render React on the Server with renderToString
+## Contexto 
+> So far, you have been rendering React components on the client. Normally, this is what you will always do. However, there are some use cases where it makes sense to render a React component on the server. Since React is a JavaScript view library and you can run JavaScript on the server with Node, this is possible. In fact, React provides a renderToString() method you can use for this purpose. [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/render-react-on-the-server-with-rendertostring
+
+## Saída Esperada
+~~~
+⏳ The App component should render to a string using ReactDOMServer.renderToString.
+~~~
+
+## Código Solução
+~~~
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <div/>
+  }
+};
+ReactDOMServer.renderToString(<App />)
+// Change code below this line
+~~~
