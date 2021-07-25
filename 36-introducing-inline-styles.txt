@@ -1,0 +1,12 @@
+class Colorful extends React.Component {
+  render() {
+    return (
+      <div style={meuEstilo}>Big Red</div>
+    );
+  }
+};
+
+const meuEstilo = {
+  color: "red",
+  fontSize: "72px"
+}

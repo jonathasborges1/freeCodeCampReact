@@ -1,0 +1,29 @@
+class ControlledInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: ''
+    };
+    // Change code below this line
+    this.atualize = this.atualize.bind(this);
+  }
+  // Change code below this line
+  atualize (e){
+    this.setState({
+      input: e.target.value
+      })
+  }
+  render() {
+    return (
+      <div>
+        <input 
+        type="text" 
+        onChange={this.atualize} 
+        value={this.state.input}
+        />
+        <h4>Controlled Input:</h4>
+        <p>{this.state.input}</p>
+      </div>
+    );
+  }
+};
