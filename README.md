@@ -2,10 +2,12 @@
 Repositório criado para armazenar as atividades https://www.freecodecamp.org/learn/front-end-libraries/react/
 
 
-# Item 18 
+# Item 18 - Use PropTypes to Define the Props You Expect
 ## Contexto
 > Use PropTypes to Define the Props You Expect
 > React provides useful type-checking features to verify that components receive props of the correct type. For example, your application makes an API call to retrieve data that you expect to be in an array, which is then passed to a component as a prop. You can set propTypes on your component to require the data to be of type array. This will throw a useful warning when the data is of any other type. [...]
+
+###### Fonte: 
 
 ## Saida Esperada: 
 ~~~
@@ -44,6 +46,8 @@ class ShoppingCart extends React.Component {
 # Item 19 - access-props-using-this-props
 ## Contexto
 > The last several challenges covered the basic ways to pass props to child components. But what if the child component that you're passing a prop to is an ES6 class component, rather than a stateless functional component? The ES6 class component uses a slightly different convention to access props. [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/access-props-using-this-props
 
 ## Saída Espera
 ~~~
