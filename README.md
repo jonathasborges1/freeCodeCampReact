@@ -568,7 +568,7 @@ class MyForm extends React.Component {
 ## Contexto - Pass State as Props to Child Components
 > You saw a lot of examples that passed props to child JSX elements and child React components in previous challenges. You may be wondering where those props come from. A common pattern is to have a stateful component containing the state important to your app, that then renders child components. You want these components to have access to some pieces of that state, which are passed in as props
 
-## Fonte : https://www.freecodecamp.org/learn/front-end-libraries/react/pass-state-as-props-to-child-components
+##### Fonte : https://www.freecodecamp.org/learn/front-end-libraries/react/pass-state-as-props-to-child-components
 
 ## Saída Esperada
 ~~~
@@ -607,4 +607,629 @@ class Navbar extends React.Component {
     );
   }
 };
+~~~
+# Item 31 - pass-a-callback-as-props
+## Contexto - 
+> You can pass state as props to child components, but you're not limited to passing data. You can also pass handler functions or any method that's defined on a React component to a child component. This is how you allow child components to interact with their parent components. You pass methods to a child just like a regular prop. It's assigned a name and you have access to that method name under this.props in the child component. [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/pass-a-callback-as-props
+
+## Saída Esoerada
+~~~
+⏳ The MyApp component should render.
+
+⏳ The GetInput component should render.
+
+⏳ The RenderInput component should render.
+
+⏳ The GetInput component should receive the MyApp state property inputValue as props and contain an input element which modifies MyApp state.
+
+⏳ The RenderInput component should receive the MyApp state property inputValue as props.
+~~~
+
+## Código Solução
+~~~
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: ''
+    }
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    this.setState({
+      inputValue: event.target.value
+    });
+  }
+  render() {
+    return (
+       <div>
+          <GetInput input = {this.state.inputValue} handleChange = {this.handleChange}/>
+          <RenderInput input = {this.state.inputValue} />
+       </div>
+    );
+  }
+};
+
+class GetInput extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h3>Get Input:</h3>
+        <input
+          value={this.props.input}
+          onChange={this.props.handleChange}/>
+      </div>
+    );
+  }
+};
+
+class RenderInput extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h3>Input Render:</h3>
+        <p>{this.props.input}</p>
+      </div>
+    );
+  }
+};
+~~~
+
+# Item 32 - Use the Lifecycle Method componentWillMount
+## Contexto - 
+> React components have several special methods that provide opportunities to perform actions at specific points in the lifecycle of a component. These are called lifecycle methods, or lifecycle hooks, and allow you to catch components at certain points in time. This can be before they are rendered, before they update, before they receive props, before they unmount, and so on. Here is a list of some of the main lifecycle methods:  [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/use-the-lifecycle-method-componentwillmount
+
+## Saída Esperada
+~~~
+⏳ MyComponent should render a div element.
+
+⏳ console.log should be called in componentWillMount
+~~~
+
+## Código Solução
+~~~
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  componentWillMount() {
+    console.log();
+  }
+  render() {
+    return <div />
+  }
+};
+~~~
+
+# Item 33 - Use the Lifecycle Method componentDidMount
+## Contexto  
+> Most web developers, at some point, need to call an API endpoint to retrieve data. If you're working with React, it's important to know where to perform this action.[...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/use-the-lifecycle-method-componentdidmount
+
+## Saída Esperada
+~~~
+⏳ MyComponent should render a div element which wraps an h1 tag.
+
+⏳ Component state should be updated with a timeout function in componentDidMount.
+
+⏳ The h1 tag should render the activeUsers value from MyComponent's state.
+~~~
+
+## Código Solução
+~~~
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeUsers: null
+    };
+  }
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        activeUsers: 1273
+      });
+    }, 2500);
+  }
+  render() {
+    return (
+      <div>
+        {/* Change code below this line */}
+        <h1>Active Users: {this.state.activeUsers} </h1>
+        {/* Change code above this line */}
+      </div>
+    );
+  }
+}
+~~~
+
+# Item 34 - Add Event Listeners
+## Contexto  
+> The componentDidMount() method is also the best place to attach any event listeners you need to add for specific functionality. React provides a synthetic event system which wraps the native event system present in browsers. This means that the synthetic event system behaves exactly the same regardless of the user's browser - even if the native events may behave differently between different browsers.  [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/add-event-listeners
+
+## Saída Esperada
+~~~
+⏳ MyComponent should render a div element which wraps an h1 tag.
+
+⏳ A keydown listener should be attached to the document in componentDidMount.
+
+⏳ The keydown listener should be removed from the document in componentWillUnmount.
+
+⏳ Once the component has mounted, pressing enter should update its state and the rendered h1 tag
+~~~
+
+## Código Solução
+~~~
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: ''
+    };
+    this.handleEnter = this.handleEnter.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+  // Change code below this line
+  componentDidMount() {
+      document.addEventListener('keydown', this.handleKeyPress);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyPress);
+  }
+  handleEnter() {
+    this.setState((state) => ({
+      message: state.message + 'You pressed the enter key! '
+    }));
+  }
+  handleKeyPress(event) {
+    if (event.keyCode === 13) {
+      this.handleEnter();
+    }
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.message}</h1>
+      </div>
+    );
+  }
+};
+~~~
+
+# Item 35 - Optimize Re-Renders with shouldComponentUpdate
+## Contexto  
+> So far, if any component receives new state or new props, it re-renders itself and all its children. This is usually okay. But React provides a lifecycle method you can call when child components receive new state or props, and declare specifically if the components should update or not. The method is shouldComponentUpdate(), and it takes nextProps and nextState as parameters. [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/optimize-re-renders-with-shouldcomponentupdate
+
+## Saída Esperada
+~~~
+⏳ The Controller component should render the OnlyEvens component as a child.
+
+⏳ The shouldComponentUpdate method should be defined on the OnlyEvens component.
+
+⏳ The OnlyEvens component should return an h1 tag which renders the value of this.props.value.
+
+⏳ OnlyEvens should re-render only when nextProps.value is even.
+~~~
+
+## Código Solução
+~~~
+class OnlyEvens extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('Should I update?');
+    if (nextProps.value % 2 === 0){
+      return true;
+     }
+    // Change code above this line
+  }
+  componentDidUpdate() {
+    console.log('Component re-rendered.');
+  }
+  render() {
+    return <h1>{this.props.value}</h1>;
+  }
+}
+
+class Controller extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 0
+    };
+    this.addValue = this.addValue.bind(this);
+  }
+  addValue() {
+    this.setState(state => ({
+      value: state.value + 1
+    }));
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.addValue}>Add</button>
+        <OnlyEvens value={this.state.value} />
+      </div>
+    );
+  }
+}
+~~~
+---
+
+# Item 36 - Introducing Inline Styles
+## Contexto  
+> There are other complex concepts that add powerful capabilities to your React code. But you may be wondering about the more simple problem of how to style those JSX elements you create in React. You likely know that it won't be exactly the same as working with HTML because of the way you apply classes to JSX elements. [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/introducing-inline-styles
+
+## Saída Esperada
+~~~
+⏳ The component should render a div element.
+
+⏳ The div element should have a color of red.
+
+⏳ The div element should have a font size of 72px.
+~~~
+
+## Código Solução
+~~~
+class Colorful extends React.Component {
+  render() {
+    return (
+      <div style={meuEstilo}>Big Red</div>
+    );
+  }
+};
+const meuEstilo = {
+  color: "red",
+  fontSize: "72px"
+}
+~~~
+# Item 37 - Add Inline Styles in React
+## Contexto 
+> You may have noticed in the last challenge that there were several other syntax differences from HTML inline styles in addition to the style attribute set to a JavaScript object. First, the names of certain CSS style properties use camel case. For example, the last challenge set the size of the font with fontSize instead of font-size. Hyphenated words like font-size are invalid syntax for JavaScript object properties, so React uses camel case. As a rule, any hyphenated style properties are written using camel case in JSX. [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/add-inline-styles-in-react
+
+## Saída Esperada
+~~~
+⏳ The styles variable should be an object with three properties.
+
+⏳ The styles variable should have a color property set to a value of purple.
+
+⏳ The styles variable should have a fontSize property set to a value of 40.
+
+⏳ The styles variable should have a border property set to a value of 2px solid purple.
+
+⏳ The component should render a div element.
+
+⏳ The div element should have its styles defined by the styles object.
+~~~
+
+## Código Solução
+~~~
+// Change code above this line
+class Colorful extends React.Component {
+
+  render() {
+    return (
+      <div style={styles}>Style Me!</div>
+    );
+    // Change code above this line
+  }
+};
+
+const styles = {
+  color: "purple", 
+  fontSize: 40,
+  border: "2px solid purple"
+}
+~~~
+
+# Item 38 - Use Advanced JavaScript in React Render Method
+## Contexto 
+> In previous challenges, you learned how to inject JavaScript code into JSX code using curly braces, { }, for tasks like accessing props, passing props, accessing state, inserting comments into your code, and most recently, styling your components. These are all common use cases to put JavaScript in JSX, but they aren't the only way that you can utilize JavaScript code in your React components.  [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/use-advanced-javascript-in-react-render-method
+
+## Saída Esperada
+~~~
+⏳ The MagicEightBall component should exist and should render to the page.
+
+⏳ MagicEightBall's first child should be an input element.
+
+⏳ MagicEightBall's third child should be a button element.
+
+⏳ MagicEightBall's state should be initialized with a property of userInput and a property of randomIndex both set to a value of an empty string.
+
+⏳ When MagicEightBall is first mounted to the DOM, it should return an empty p element.
+
+⏳ When text is entered into the input element and the button is clicked, the MagicEightBall component should return a p element that contains a random element from the possibleAnswers array.
+~~~
+
+## Código Solução
+~~~
+const inputStyle = {
+  width: 235,
+  margin: 5
+};
+
+class MagicEightBall extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userInput: '',
+      randomIndex: ''
+    };
+    this.ask = this.ask.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  ask() {
+    if (this.state.userInput) {
+      this.setState({
+        randomIndex: Math.floor(Math.random() * 20),
+        userInput: ''
+      });
+    }
+  }
+  handleChange(event) {
+    this.setState({
+      userInput: event.target.value
+    });
+  }
+  render() {
+    const possibleAnswers = [
+      'It is certain',
+      'It is decidedly so',
+      'Without a doubt',
+      'Yes, definitely',
+      'You may rely on it',
+      'As I see it, yes',
+      'Outlook good',
+      'Yes',
+      'Signs point to yes',
+      'Reply hazy try again',
+      'Ask again later',
+      'Better not tell you now',
+      'Cannot predict now',
+      'Concentrate and ask again',
+      "Don't count on it",
+      'My reply is no',
+      'My sources say no',
+      'Most likely',
+      'Outlook not so good',
+      'Very doubtful'
+    ];
+    const answer = possibleAnswers[this.state.randomIndex];
+    return (
+      <div>
+        <input
+          type='text'
+          value={this.state.userInput}
+          onChange={this.handleChange}
+          style={inputStyle}
+        />
+        <br />
+        <button onClick={this.ask}>Ask the Magic Eight Ball!</button>
+        <br />
+        <h3>Answer:</h3>
+        <p>
+          {answer}
+        </p>
+      </div>
+    );
+  }
+}
+~~~
+
+# Item 39 - Render with an If-Else Condition
+## Contexto 
+> Another application of using JavaScript to control your rendered view is to tie the elements that are rendered to a condition. When the condition is true, one view renders. When it's false, it's a different view. You can do this with a standard if/else statement in the render() method of a React component.  [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/render-with-an-if-else-condition
+
+## Saída Esperada
+~~~
+⏳ MyComponent should exist and render.
+
+⏳ When display is set to true, a div, button, and h1 should render.
+
+⏳ When display is set to false, only a div and button should render.
+
+⏳ The render method should use an if/else statement to check the condition of this.state.display.
+~~~
+
+## Código Solução
+~~~
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      display: true
+    }
+    this.toggleDisplay = this.toggleDisplay.bind(this);
+  }
+  toggleDisplay() {
+    this.setState((state) => ({
+      display: !state.display
+    }));
+  }
+  render() {
+    const display = this.state.display
+    if(display){
+      return (
+        <div>
+          <button onClick={this.toggleDisplay}>Toggle Display</button>
+          <h1>Displayed!</h1>
+       </div>
+      )
+    }else{
+      return (
+        <div>
+          <button onClick={this.toggleDisplay}>Toggle Display</button>
+       </div>
+      )
+    }
+  }
+};
+~~~
+
+# Item 40 - Use && for a More Concise Conditional
+## Contexto 
+> The if/else statements worked in the last challenge, but there's a more concise way to achieve the same result. Imagine that you are tracking several conditions in a component and you want different elements to render depending on each of these conditions. If you write a lot of else if statements to return slightly different UIs, you may repeat code which leaves room for error. Instead, you can use the && logical operator to perform conditional logic in a more concise way. This is possible because you want to check if a condition is true, and if it is, return some markup. Here's an example:  [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/use--for-a-more-concise-conditional
+
+## Saída Esperada
+~~~
+⏳ MyComponent should exist and render.
+
+⏳ When display is set to true, a div, button, and h1 should render.
+
+⏳ When display is set to false, only a div and button should render.
+
+⏳ The render method should use the && logical operator to check the condition of this.state.display.
+~~~
+
+## Código Solução
+~~~
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      display: true
+    }
+    this.toggleDisplay = this.toggleDisplay.bind(this);
+  }
+  toggleDisplay() {
+    this.setState(state => ({
+      display: !state.display
+    }));
+  }
+  render() {
+    return (
+       <div>
+         <button onClick={this.toggleDisplay}>Toggle Display</button>
+         {this.state.display && <h1>Displayed!</h1>}
+       </div>
+    );
+  }
+};
+~~~
+# Item 41 - Use a Ternary Expression for Conditional Rendering
+## Contexto 
+> Before moving on to dynamic rendering techniques, there's one last way to use built-in JavaScript conditionals to render what you want: the ternary operator. The ternary operator is often utilized as a shortcut for if/else statements in JavaScript. They're not quite as robust as traditional if/else statements, but they are very popular among React developers. One reason for this is because of how JSX is compiled, if/else statements can't be inserted directly into JSX code. You might have noticed this a couple challenges ago — when an if/else statement was required, it was always outside the return statement. Ternary expressions can be an excellent alternative if you want to implement conditional logic within your JSX. Recall that a ternary operator has three parts, but you can combine several ternary expressions together. Here's the basic syntax: [...]
+
+###### Fonte:https://www.freecodecamp.org/learn/front-end-libraries/react/use-a-ternary-expression-for-conditional-rendering
+
+## Saída Esperada
+~~~
+⏳ The CheckUserAge component should render with a single input element and a single button element.
+
+⏳ The CheckUserAge component's state should be initialized with a property of userAge and a property of input, both set to a value of an empty string.
+
+⏳ When the CheckUserAge component is first rendered to the DOM, the button's inner text should be Submit.
+
+⏳ When a number of less than 18 is entered into the input element and the button is clicked, the button's inner text should read You Shall Not Pass.
+
+⏳ When a number greater than or equal to 18 is entered into the input element and the button is clicked, the button's inner text should read You May Enter.
+
+⏳ Once a number has been submitted, and the value of the input is once again changed, the button should return to reading Submit.
+
+⏳ Your code should not contain any if/else statements.
+~~~
+
+## Código Solução
+~~~
+const inputStyle = {
+  width: 235,
+  margin: 5
+};
+
+class CheckUserAge extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+      userAge: ''
+    }
+    this.submit = this.submit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(e) {
+    this.setState({
+      input: e.target.value,
+      userAge: ''
+    });
+  }
+  submit() {
+    this.setState(
+      (state) => {return { userAge: state.input}}
+    );
+  }
+  render() {
+    const buttonOne = <button onClick={this.submit}>Submit</button>;
+    const buttonTwo = <button>You May Enter</button>;
+    const buttonThree = <button>You Shall Not Pass</button>;
+    return (
+        <div>
+          <h3>Enter Your Age to Continue</h3>
+          <input
+            style={inputStyle}
+            type='number'
+            value={this.state.input}
+            onChange={this.handleChange}
+          />
+
+          <br />
+          {this.state.userAge >= 18 ? buttonTwo 
+          :this.state.userAge === "" ? buttonOne : buttonThree}
+
+        </div>
+    )}
+}
+~~~
+
+# Item 42 - Render Conditionally from Props
+## Contexto 
+> So far, you've seen how to use if/else, &&, and the ternary operator (condition ? expressionIfTrue : expressionIfFalse) to make conditional decisions about what to render and when. However, there's one important topic left to discuss that lets you combine any or all of these concepts with another powerful React feature: props. Using props to conditionally render code is very common with React developers — that is, they use the value of a given prop to automatically make decisions about what to render. [...]
+
+###### fONTE: https://www.freecodecamp.org/learn/front-end-libraries/react/use-a-ternary-expression-for-conditional-rendering
+
+## Saída Esperada
+~~~
+⏳ The GameOfChance component should exist and render to the page.
+
+⏳ GameOfChance should return a single button element.
+
+⏳ GameOfChance should return a single instance of the Results component, which has a prop called fiftyFifty.
+
+⏳ GameOfChance state should be initialized with a property of counter set to a value of 1.
+
+⏳ When the GameOfChance component is first rendered to the DOM, a p element should be returned with the inner text of Turn: 1.
+
+⏳ Each time the button is clicked, the counter state should be incremented by a value of 1, and a single p element should be rendered to the DOM that contains the text Turn: N, where N is the value of the counter state.
+
+⏳ When the GameOfChance component is first mounted to the DOM and each time the button is clicked thereafter, a single h1 element should be returned that randomly renders either You Win! or You Lose!.
+~~~
+
+## Código Solução
+~~~
+
 ~~~
