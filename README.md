@@ -2,6 +2,644 @@
 Repositório criado para armazenar as atividades https://www.freecodecamp.org/learn/front-end-libraries/react/
 
 
+# Item 01 - Use PropTypes to Define the Props You Expect
+## Contexto
+> React is an Open Source view library created and maintained by Facebook. It's a great tool to render the User Interface (UI) of modern web applications. [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/create-a-simple-jsx-element
+
+## Saida Esperada: 
+~~~
+⏳ The constant JSX should return an h1 element.
+
+⏳ The h1 tag should include the text Hello JSX!
+~~~
+
+## Código Solução
+~~~
+const JSX =  <h1>Hello JSX!</h1>;
+~~~
+
+# Item 02 - Create a Complex JSX ElementPassed
+## Contexto
+> The last challenge was a simple example of JSX, but JSX can represent more complex HTML as well [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/create-a-complex-jsx-element
+
+## Saida Esperada: 
+~~~
+⏳ The constant JSX should return a div element.
+
+⏳ The div should contain an h1 tag as the first element.
+
+⏳ The div should contain a p tag as the second element.
+
+⏳ The div should contain a ul tag as the third element.
+
+⏳ The ul should contain three li elements.
+~~~
+
+## Código Solução
+~~~
+const JSX = 
+<div> 
+ <h1></h1> 
+ <p></p>
+ <ul> <li></li> <li></li> <li></li> </ul> 
+</div>
+~~~
+
+# Item 03 - Add Comments in JSXPassed
+## Contexto
+> SX is a syntax that gets compiled into valid JavaScript. Sometimes, for readability, you might need to add comments to your code. Like most programming languages, JSX has its own way to do this [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/add-comments-in-jsx
+
+## Saida Esperada: 
+~~~
+⏳ The constant JSX should return a div element.
+
+⏳ The div should contain an h1 tag as the first element.
+
+⏳ The div should contain a p tag as the second element.
+
+⏳ The existing h1 and p elements should not be modified.
+
+⏳ The JSX should use valid comment syntax.
+~~~
+
+## Código Solução
+~~~
+const JSX = (
+  <div>{/* Comments */}
+    <h1>This is a block of JSX</h1>
+    <p>Here's a subtitle</p>
+  </div>
+);
+~~~
+
+# Item 04 - Render HTML Elements to the DOM Passed
+## Contexto
+> o far, you've learned that JSX is a convenient tool to write readable HTML within JavaScript. With React, we can render this JSX directly to the HTML DOM using React's rendering API known as ReactDOM. [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/render-html-elements-to-the-dom
+
+## Saida Esperada: 
+~~~
+⏳ The constant JSX should return a div element.
+
+The div should contain an h1 tag as the first element.
+
+The div should contain a p tag as the second element.
+
+The provided JSX element should render to the DOM node with id challenge-node.
+~~~
+
+## Código Solução
+~~~
+const JSX = (
+  <div>
+    <h1>Hello World</h1>
+    <p>Lets render this to the DOM</p>
+  </div>
+);
+// Change code below this line
+ReactDOM.render(JSX,document.getElementById("challenge-node"));
+~~~
+
+# Item 05 - Render HTML Elements to the DOM Passed
+## Contexto
+> o far, you've learned that JSX is a convenient tool to write readable HTML within JavaScript. With React, we can render this JSX directly to the HTML DOM using React's rendering API known as ReactDOM. [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/render-html-elements-to-the-dom
+
+## Saida Esperada: 
+~~~
+⏳ The constant JSX should return a div element.
+
+⏳ The div should have a class of myDiv
+~~~
+
+## Código Solução
+~~~
+const JSX = (
+  <div className="myDiv">
+    <h1>Add a class to this div</h1>
+  </div>
+);
+
+~~~
+
+# Item 06 - Learn About Self-Closing JSX Tags
+## Contexto
+> So far, you’ve seen how JSX differs from HTML in a key way with the use of className vs. class for defining HTML classes. [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/learn-about-self-closing-jsx-tags
+
+## Saida Esperada: 
+~~~
+⏳ The constant JSX should return a div element.
+
+⏳ The div should contain a br tag.
+
+⏳ The div should contain an hr tag.
+~~~
+
+## Código Solução
+~~~
+const JSX = (
+  <div>
+    <h2>Welcome to React!</h2>
+    <p>Be sure to close all tags!</p>
+    <br></br>
+    <hr></hr>
+  </div>
+);
+~~~
+
+# Item 07 - Create a Stateless Functional Component
+## Contexto
+> Components are the core of React. Everything in React is a component and here you will learn how to create one [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/create-a-stateless-functional-component
+
+## Saida Esperada: 
+~~~
+⏳ MyComponent should return JSX.
+
+⏳ MyComponent should return a div element.
+
+⏳ The div element should contain a string of text.
+~~~
+
+## Código Solução
+~~~
+const MyComponent = function() {
+  return (
+      <div>
+        
+        Jonathas
+      </div>
+  )
+}
+
+~~~
+
+# Item 08 - Create a React Component
+## Contexto
+> The other way to define a React component is with the ES6 class syntax. In the following example, Kitten extends React.Component: [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/create-a-react-component
+
+## Saida Esperada: 
+~~~
+⏳ The React component should return a div element.
+
+⏳ The returned div should render an h1 header within it.
+
+⏳ The h1 header should contain the string Hello React!.
+
+~~~
+
+## Código Solução
+~~~
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return(
+      <div>
+        <h1>Hello React!</h1>
+      </div>
+    );
+  }
+}
+~~~
+
+# Item 09 - Create a Component with Composition
+## Contexto
+> Now we will look at how we can compose multiple React components together. Imagine you are building an app and have created three components: a Navbar, Dashboard, and Footer[...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/create-a-component-with-composition
+
+## Saida Esperada: 
+~~~
+⏳ The React component should return a single div element.
+
+⏳ The component should return two nested elements.
+
+⏳ The component should return the ChildComponent as its second child.
+~~~
+
+## Código Solução
+~~~
+const ChildComponent = () => {
+  return (
+    <div>
+      <p>I am the child</p>
+    </div>
+  );
+};
+
+class ParentComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>I am the parent</h1>
+        <ChildComponent />
+      </div>
+    );
+  }
+};
+~~~
+
+# Item 10 - Use React to Render Nested ComponentsPassed
+## Contexto
+> The last challenge showed a simple way to compose two components, but there are many different ways you can compose components with React. [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/use-react-to-render-nested-components
+
+## Saida Esperada: 
+~~~
+⏳ The TypesOfFood component should return a single div element.
+
+⏳ The TypesOfFood component should return the Fruits component.
+
+⏳ The Fruits component should return the TypesOfFruit component.
+
+⏳ The TypesOfFruit component should return the h2 and ul elements
+~~~
+
+## Código Solução
+~~~
+const TypesOfFruit = () => {
+  return (
+    <div>
+      <h2>Fruits:</h2>
+      <ul>
+        <li>Apples</li>
+        <li>Blueberries</li>
+        <li>Strawberries</li>
+        <li>Bananas</li>
+      </ul>
+    </div>
+  );
+};
+
+const Fruits = () => {
+  return (
+    <div>
+    <TypesOfFruit/>
+    </div>
+  );
+};
+class TypesOfFood extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>Types of Food:</h1>
+        <Fruits />
+      </div>
+    );
+  }
+};
+~~~
+---
+
+# Item 11 - Compose React ComponentsPassed
+## Contexto
+> As the challenges continue to use more complex compositions with React components and JSX, there is one important point to note. Rendering ES6 style class components within other components is no different than rendering the simple components you used in the last few challenges. You can render JSX elements, stateless functional components, and ES6 class components within other components. [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/compose-react-components
+
+## Saida Esperada: 
+~~~
+⏳ The TypesOfFood component should return a single div element.
+
+⏳ The TypesOfFood component should return the Fruits component.
+
+⏳ The Fruits component should return the NonCitrus component and the Citrus component.
+
+⏳ The TypesOfFood component should return the Vegetables component below the Fruits component.
+~~~
+
+## Código Solução
+~~~
+const NonCitrus = () =>{
+  return(
+      <div></div>
+  );
+}
+
+const Citrus = () =>{
+  return(
+      <div></div>
+  );
+}
+
+class Fruits extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h2>Fruits:</h2>
+        <NonCitrus/>
+        <Citrus/>
+      </div>
+    );
+  }
+};
+class TypesOfFood extends React.Component {
+  constructor(props) {
+     super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>Types of Food:</h1>
+        <Fruits/>
+        <Vegetables />
+      </div>
+    );
+  }
+};
+~~~
+
+# Item 12 - Render a Class Component to the DOM
+## Contexto
+> You may remember using the ReactDOM API in an earlier challenge to render JSX elements to the DOM. The process for rendering React components will look very similar. The past few challenges focused on components and composition, so the rendering was done for you behind the scenes. However, none of the React code you write will render to the DOM without making a call to the ReactDOM API. [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/render-a-class-component-to-the-dom
+
+## Saida Esperada: 
+~~~
+⏳ The TypesOfFood component should return a single div element.
+
+⏳ The TypesOfFood component should render the Fruits component after the h1 element.
+
+⏳ The TypesOfFood component should render the Vegetables component after Fruits.
+
+⏳ The TypesOfFood component should render to the DOM within the div with the id challenge-node.
+~~~
+
+## Código Solução
+~~~
+class TypesOfFood extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>Types of Food:</h1>
+        <Fruits />
+        <Vegetables />
+      </div>
+    );
+  }
+};
+ReactDOM.render(
+  <TypesOfFood/>,
+  document.getElementById('challenge-node')
+);
+const Fruits = () => {
+  return (
+   <div>
+      <h2>Fruits:</h2>
+      <h4>Non-Citrus:</h4>
+        <ul>
+          <li>Apples</li>
+          <li>Blueberries</li>
+          <li>Strawberries</li>
+          <li>Bananas</li>
+        </ul>
+      <h4>Citrus:</h4>
+        <ul>
+          <li>Lemon</li>
+          <li>Lime</li>
+          <li>Orange</li>
+          <li>Grapefruit</li>
+        </ul>
+    </div>
+  )
+}
+const Vegetables = () => {
+  return (
+    <div>
+      <h2>Vegetables:</h2>
+      <ul>
+        <li>Brussel Sprouts</li>
+        <li>Broccoli</li>
+        <li>Squash</li>
+      </ul>
+    </div>
+  )
+}
+~~~
+
+# Item 13 - Write a React Component from Scratch
+## Contexto
+> Now that you've learned the basics of JSX and React components, it's time to write a component on your own. React components are the core building blocks of React applications so it's important to become very familiar with writing them. Remember, a typical React component is an ES6 class which extends React.Component. It has a render method that returns HTML (from JSX) or null. This is the basic form of a React component. Once you understand this well, you will be prepared to start building more complex React projects [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/write-a-react-component-from-scratch
+
+## Saida Esperada: 
+~~~
+⏳ There should be a React component called MyComponent.
+
+⏳ MyComponent should contain an h1 tag with text My First React Component! Case and punctuation matter.
+
+⏳ MyComponent should render to the DOM.
+
+⏳ MyComponent should have a constructor calling super with props.
+~~~
+
+## Código Solução
+~~~
+// Change code below this line
+class MyComponent extends React.Component {
+  constructor(props){
+    super(props);
+  }
+  render (){
+    return (
+      <div>
+        <h1>My First React Component!</h1>
+      </div>
+   )
+  }
+};
+ReactDOM.render(<MyComponent/>, document.getElementById('challenge-node'));
+~~~
+
+
+# Item 14 - Pass Props to a Stateless Functional Component
+## Contexto
+>  The previous challenges covered a lot about creating and composing JSX elements, functional components, and ES6 style class components in React. With this foundation, it's time to look at another feature very common in React: props. In React, you can pass props, or properties, to child components. Say you have an App component which renders a child component called Welcome which is a stateless functional component. You can pass Welcome a user property by writing [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/pass-props-to-a-stateless-functional-component
+
+## Saida Esperada: 
+~~~
+⏳ The Calendar component should return a single div element.
+
+⏳ The second child of the Calendar component should be the CurrentDate component.
+
+⏳ The CurrentDate component should have a prop called date.
+
+⏳ The date prop of the CurrentDate should contain a string of text.
+
+⏳ The date prop should be generated by calling Date()
+
+⏳ The CurrentDate component should render the value from the date prop in the p tag.
+~~~
+
+## Código Solução
+~~~
+const CurrentDate = (props) => {
+  return (
+    <div>
+      <p>The current date is: {props.date} </p>
+    </div>
+  );
+};
+
+class Calendar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h3>What date is it?</h3>
+        <CurrentDate date={Date()} />
+      </div>
+    );
+  }
+};
+~~~
+
+# Item 15 - Pass an Array as PropsPassed
+## Contexto
+>  The last challenge demonstrated how to pass information from a parent component to a child component as props or properties. This challenge looks at how arrays can be passed as props. To pass an array to a JSX element, it must be treated as JavaScript and wrapped in curly braces.[...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/pass-an-array-as-props
+
+## Saida Esperada: 
+~~~
+⏳ The ToDo component should return a single outer div.
+
+⏳ The third child of the ToDo component should be an instance of the List component.
+
+⏳ The fifth child of the ToDo component should be an instance of the List component.
+
+⏳ Both instances of the List component should have a property called tasks and tasks should be of type array.
+
+⏳ The first List component representing the tasks for today should have 2 or more items.
+
+⏳ The second List component representing the tasks for tomorrow should have 3 or more items.
+
+⏳ The List component should render the value from the tasks prop in the p tag.
+~~~
+
+## Código Solução
+~~~
+const List = (props) => {
+  return <p>{props.tasks.join(', ')}</p>
+};
+class ToDo extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>To Do Lists</h1>
+        <h2>Today</h2>
+        <List tasks = {['Melao','Cocada']}/>
+        <h2>Tomorrow</h2>
+        <List tasks = {['Melao','Cocada','Lasanha']}/>
+      </div>
+    );
+  }
+};
+~~~
+
+# Item 16 - Use Default Props
+## Contexto
+>  React also has an option to set default props. You can assign default props to a component as a property on the component itself and React assigns the default prop if necessary. This allows you to specify what a prop value should be if no value is explicitly provided. For example, if you declare MyComponent.defaultProps = { location: 'San Francisco' }, you have defined a location prop that's set to the string San Francisco, unless you specify otherwise. React assigns default props if props are undefined, but if you pass null as the value for a prop, it will remain null. [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/use-default-props
+
+## Saida Esperada: 
+~~~
+⏳ The ShoppingCart component should render.
+
+⏳ The ShoppingCart component should have a default prop of { items: 0 }.
+~~~
+
+## Código Solução
+~~~
+class MyComponent extends React.Component{
+  constructor(props){
+    super(props);
+  }
+  render(){
+    return ( <ShoppingCart items={10} />)
+  }
+};
+const ShoppingCart = (props) => {
+ ShoppingCart.defaultProps = { items:0 }
+  return (
+    <div>
+      <h1>Shopping Cart Component {props.items} </h1>
+    </div>
+  )
+};
+~~~
+
+# Item 17 - Override Default Props
+## Contexto
+>  The ability to set default props is a useful feature in React. The way to override the default props is to explicitly set the prop values for a component [...]
+
+###### Fonte: https://www.freecodecamp.org/learn/front-end-libraries/react/override-default-props
+
+## Saida Esperada: 
+~~~
+⏳ The component ShoppingCart should render.
+
+⏳ The component Items should render.
+
+⏳ The Items component should have a prop of { quantity: 10 } passed from the ShoppingCart component.
+~~~
+
+## Código Solução
+~~~
+const Items = (props) => {
+  return <h1>Current Quantity of Items in Cart: {props.quantity}</h1>
+}
+Items.defaultProps = {
+  quantity: 0
+}
+class ShoppingCart extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <Items quantity={10} />
+  }
+};
+~~~
+
 # Item 18 - Use PropTypes to Define the Props You Expect
 ## Contexto
 > Use PropTypes to Define the Props You Expect
