@@ -1,0 +1,16 @@
+class MyComponent extends React.Component{
+  constructor(props){
+    super(props);
+  }
+  render(){
+    return ( <ShoppingCart items={10} />)
+  }
+};
+const ShoppingCart = (props) => {
+ ShoppingCart.defaultProps = { items:0 }
+  return (
+    <div>
+      <h1>Shopping Cart Component {props.items} </h1>
+    </div>
+  )
+};
