@@ -1,5 +1,5 @@
 #Front End Development Libraries
-![Alt text](/img/react.jpg)
+![Alt text](/img/react.png)
 
 
 # freeCodeCampReact
